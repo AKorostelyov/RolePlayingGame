@@ -10,6 +10,7 @@ public class Spider extends Monster{
         this.attackDamage = 18;
         this.perceptionLvl = 7;
         this.experienceBonus = 10;
+        this.goldBonus = 5;
         Printer.print(GameMessages.MONSTER_SPIDER_MESSAGE);
     }
 }

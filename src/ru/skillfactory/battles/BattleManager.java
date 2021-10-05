@@ -45,13 +45,14 @@ public class BattleManager {
         } else {
             Printer.formatPrint(GameMessages.BATTLE_MONSTER_KILL_MESSAGE, monster.getClass().getSimpleName(), Player.getInstance().getName(), String.valueOf(Player.getInstance().getHealth()));
             ExperienceCalculator.updateExpPlayer(monster.getExperienceBonus());
-            BonusCalculator.earnCoins();
+            BonusCalculator.earnCoins(monster);
             Statistic.addMonster(monster);
         }
     }
 
     /**
      * Метод получения урона монстром
+     *
      * @param monster монстр
      */
     private static void monsterTakeDamage(Monster monster) {
@@ -66,6 +67,7 @@ public class BattleManager {
 
     /**
      * Метод получения урона персонажем
+     *
      * @param monster монстр
      */
     private static void playerTakeDamage(Monster monster) {
@@ -104,7 +106,7 @@ public class BattleManager {
             return (random.nextBoolean()) ? new Skeleton() : new Bandit();
         } else if (Player.getInstance().getLvl() <= MID_LEVEL_ENEMY) {
             int monster = random.nextInt(4);
-            switch (monster){
+            switch (monster) {
                 case 1:
                     return new Bandit();
                 case 2:
@@ -114,7 +116,7 @@ public class BattleManager {
             }
         } else {
             int monster = random.nextInt(5);
-            switch (monster){
+            switch (monster) {
                 case 1:
                     return new Bandit();
                 case 2:

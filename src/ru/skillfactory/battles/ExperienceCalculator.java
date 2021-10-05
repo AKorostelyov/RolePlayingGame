@@ -4,6 +4,7 @@ import javafx.util.Pair;
 import ru.skillfactory.creatures.player.Player;
 import ru.skillfactory.game.Configuration;
 import ru.skillfactory.game.GameMessages;
+import ru.skillfactory.game.Statistic;
 import ru.skillfactory.maintenance.Printer;
 
 /**
@@ -35,6 +36,8 @@ public class ExperienceCalculator {
             Player.getInstance().setMaxHealth(Player.getInstance().getMaxHealth() + Player.getInstance().getLvl() * 2);
             Player.getInstance().setStrengthLvl(Player.getInstance().getStrengthLvl() + Player.getInstance().getLvl());
             Player.getInstance().fullFillHealth();
+            Player.getInstance().setMoney(Player.getInstance().getMoney() + Configuration.COINS_FOR_LVL * Player.getInstance().getLvl());
+            Statistic.addCoins(Configuration.COINS_FOR_LVL * Player.getInstance().getLvl());
             Printer.formatPrint(GameMessages.BATTLE_PLAYER_LEVEL_UP_MESSAGE,
                     Player.getInstance().getName(),
                     String.valueOf(Player.getInstance().getLvl()),

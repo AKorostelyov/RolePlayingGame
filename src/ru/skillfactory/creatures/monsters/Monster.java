@@ -9,6 +9,11 @@ public abstract class Monster {
     protected int perceptionLvl;
     protected int agilityLvl;
     protected int experienceBonus;
+    protected int goldBonus;
+
+    public int getGoldBonus() {
+        return goldBonus;
+    }
 
     public int getHealth() {
         return health;

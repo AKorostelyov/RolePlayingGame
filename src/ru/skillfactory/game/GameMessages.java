@@ -97,6 +97,7 @@ public enum GameMessages {
     BATTLE_CRITICAL_HIT_MESSAGE("IT`S CRITICAL HIT"),
     BATTLE_MISSED_HIT("%s is missed"),
     BATTLE_PLAYER_EARN_GOLD_MESSAGE("%s earned %s coins"),
+    BATTLE_PLAYER_HAVE_NOTHING_MESSAGE("%s have nothing found in %s pockets"),
     BATTLE_DEAD_MESSAGE(
             "\n||||      ||||      |||||      ||||     |||| |||| |||||||||||||  |||||||||||||       |||||||||||    ||||  |||||||||||||  |||||||||||  \n" +
                     "||||      ||||  ||||     ||||  ||||     |||| ||   ||||     ||||  |||||||||||||       ||||      |||  ||||  |||||||||||||  ||||      |||\n" +

@@ -10,6 +10,7 @@ public class Troll extends Monster {
         this.attackDamage = 26;
         this.perceptionLvl = 2;
         this.experienceBonus = 12;
+        this.goldBonus = 7;
         Printer.print(GameMessages.MONSTER_TROLL_MESSAGE);
     }
 }

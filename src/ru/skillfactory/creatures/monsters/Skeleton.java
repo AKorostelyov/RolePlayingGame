@@ -11,6 +11,7 @@ public class Skeleton extends Monster {
         this.attackDamage = 4;
         this.perceptionLvl = 3;
         this.experienceBonus = 2;
+        this.goldBonus = 2;
         Printer.print(GameMessages.MONSTER_SKELETON_MESSAGE);
     }
 }

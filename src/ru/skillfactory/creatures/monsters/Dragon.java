@@ -10,6 +10,7 @@ public class Dragon extends Monster {
         this.attackDamage = 80;
         this.perceptionLvl = 15;
         this.experienceBonus = 80;
+        this.goldBonus = 10;
         Printer.print(GameMessages.MONSTER_DRAGON_MESSAGE);
     }
 }

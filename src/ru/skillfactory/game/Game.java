@@ -24,9 +24,7 @@ public class Game {
      * @throws InterruptedException
      */
     public static void startGame() throws InterruptedException {
-        tradeShop.resetStocks();
-        Statistic.resetStatistic();
-
+        resetGame();
         Printer.print(GameMessages.COMMON_NAME_CHOICE_MESSAGE);
         String playerName = scanner.next();
         Printer.formatPrint(GameMessages.COMMON_GREETING_MESSAGE, playerName);
@@ -126,25 +124,25 @@ public class Game {
                 break;
             case "3":
                 if (tradeShop.buyItem(Items.AGILITY_BOOSTER, Integer.parseInt(count))) {
-                    Player.getInstance().setAgilityLvl(Player.getInstance().getAgilityLvl()+1);
+                    Player.getInstance().setAgilityLvl(Player.getInstance().getAgilityLvl() + 1);
                     Statistic.addSpentCoins(tradeShop.getItemPrice(Items.AGILITY_BOOSTER) * Integer.parseInt(count));
                 }
                 break;
             case "4":
                 if (tradeShop.buyItem(Items.LUCK_BOOSTER, Integer.parseInt(count))) {
-                    Player.getInstance().setLuckLvl(Player.getInstance().getLuckLvl()+1);
+                    Player.getInstance().setLuckLvl(Player.getInstance().getLuckLvl() + 1);
                     Statistic.addSpentCoins(tradeShop.getItemPrice(Items.LUCK_BOOSTER) * Integer.parseInt(count));
                 }
                 break;
             case "5":
                 if (tradeShop.buyItem(Items.PERCEPTION_BOOSTER, Integer.parseInt(count))) {
-                    Player.getInstance().setPerceptionLvl(Player.getInstance().getPerceptionLvl()+1);
+                    Player.getInstance().setPerceptionLvl(Player.getInstance().getPerceptionLvl() + 1);
                     Statistic.addSpentCoins(tradeShop.getItemPrice(Items.PERCEPTION_BOOSTER) * Integer.parseInt(count));
                 }
                 break;
             case "6":
                 if (tradeShop.buyItem(Items.WEAPON, Integer.parseInt(count))) {
-                    Player.getInstance().setStrengthLvl(Player.getInstance().getStrengthLvl()+Configuration.WEAPON_DEFAULT_DAMAGE_BONUS);
+                    Player.getInstance().setStrengthLvl(Player.getInstance().getStrengthLvl() + Configuration.WEAPON_DEFAULT_DAMAGE_BONUS);
                     Statistic.addSpentCoins(tradeShop.getItemPrice(Items.WEAPON) * Integer.parseInt(count));
                 }
                 break;
@@ -185,5 +183,11 @@ public class Game {
                 Printer.print(GameMessages.COMMON_FAREWELL_MESSAGE);
             }
         }
+    }
+
+    private static void resetGame() {
+        tradeShop.resetStocks();
+        Statistic.resetStatistic();
+        gameDays = 1;
     }
 }

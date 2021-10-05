@@ -26,16 +26,16 @@ public class TradeShop {
         this.assortments.add(new Assortment(Items.AGILITY_BOOSTER, Configuration.AGILITY_BOOSTER_DEFAULT_STOCK, Configuration.AGILITY_BOOSTER_DEFAULT_PRICE));
         this.assortments.add(new Assortment(Items.LUCK_BOOSTER, Configuration.LUCK_BOOSTER_DEFAULT_STOCK, Configuration.LUCK_BOOSTER_DEFAULT_PRICE));
         this.assortments.add(new Assortment(Items.PERCEPTION_BOOSTER, Configuration.PERCEPTION_BOOSTER_DEFAULT_STOCK, Configuration.PERCEPTION_BOOSTER_DEFAULT_PRICE));
-        this.assortments.add(new Assortment(Items.WEAPON, Configuration.WEAPON_DEFAULT_STOCK,Configuration.WEAPON_DEFAULT_PRICE));
+        this.assortments.add(new Assortment(Items.WEAPON, Configuration.WEAPON_DEFAULT_STOCK, Configuration.WEAPON_DEFAULT_PRICE));
     }
 
     /**
      * Обновляет цены, изменяя их случайным образом в отрезке (-15, 15) процентов от базовой цены
      */
     public void updatePrices() {
-        int inflation = Math.round(new Random().nextInt(15) * 25 / 100);
+        double inflation = new Random().nextInt(5)/100;
         for (Assortment assortment : assortments) {
-            assortment.setPrice(assortment.getPrice() + ((new Random().nextBoolean()) ? (-1) * inflation : inflation));
+            assortment.setPrice(Math.round(assortment.getPrice() + assortment.getPrice()*Player.getInstance().getLvl() / 20 + ((new Random().nextBoolean()) ? (-1) * (inflation*assortment.getPrice()) : (inflation*assortment.getPrice()))));
         }
     }
 
@@ -55,36 +55,6 @@ public class TradeShop {
             updateItemStock(item, remainStock);
             return true;
         }
-
-//        switch (item) {
-//            case HEAL:
-//                remainStock = trade(
-//                        count,
-//                        Player.getInstance().getMoney(),
-//                        healPoisonPrice,
-//                        healPoisonStock);
-//                if (remainStock < 0) {
-//                    return false;
-//                } else {
-//                    healPoisonStock = remainStock;
-//                    return true;
-//                }
-//            case ARMOR:
-//                remainStock = trade(
-//                        count,
-//                        Player.getInstance().getMoney(),
-//                        armorPrice,
-//                        armorStock);
-//                if (remainStock < 0) {
-//                    return false;
-//                } else {
-//                    armorStock = remainStock;
-//                    return true;
-//                }
-//            default:
-//                Printer.print(GameMessages.TRADER_UNKNOWN_ITEM_MESSAGE);
-//                return false;
-//        }
     }
 
     /**
@@ -160,7 +130,7 @@ public class TradeShop {
         initAssortment();
     }
 
-    public int getItemPrice(Items items) {
+    public long getItemPrice(Items items) {
         for (Assortment assortment : assortments) {
             if (assortment.getItem().equals(items)) {
                 return assortment.getPrice();
@@ -199,7 +169,7 @@ public class TradeShop {
 class Assortment {
     private Items item;
     private int stock;
-    private int price;
+    private long price;
 
     public Assortment(Items item, int stock, int price) {
         this.item = item;
@@ -223,11 +193,11 @@ class Assortment {
         this.stock = stock;
     }
 
-    public int getPrice() {
+    public long getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(long price) {
         this.price = price;
     }
 }

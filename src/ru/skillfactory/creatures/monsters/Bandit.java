@@ -10,7 +10,7 @@ public class Bandit extends Monster {
         this.attackDamage = 7;
         this.perceptionLvl = 5;
         this.experienceBonus = 3;
-
+        this.goldBonus = 3;
         Printer.print(GameMessages.MONSTER_BANDIT_MESSAGE);
     }
 }
