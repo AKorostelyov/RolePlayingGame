@@ -40,6 +40,10 @@ public class Player {
         return luckLvl;
     }
 
+    public void setLuckLvl(int luckLvl) {
+        this.luckLvl = luckLvl;
+    }
+
     public String getPlayerClass() {
         return playerClass;
     }

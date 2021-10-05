@@ -45,8 +45,11 @@ public enum GameMessages {
 
     TRADER_WELCOME_MESSAGE("Welcome, traveller!\n" +
             " Here`s my assortment:\n" +
-            "  1. Heal poison, %s pcs - %s coins\n" +
-            "  2. Armor, %s pcs - %s coins.\n" +
+            "  1. Heal poison (+5 health points), %s pcs - %s coins,\n" +
+            "  2. Armor (+5 to defence), %s pcs - %s coins\n" +
+            "  3. Agility booster (+1 to agility level), %s pcs - %s coins,\n" +
+            "  4. Luck booster (+1 to luck level), %s pcs - %s coins,\n" +
+            "  5. Perception booster (+1 to perception level), %s pcs - %s coins,\n" +
             "For choice enter item number and count.\n" +
             "For exit enter '0 0'"),
     TRADER_UNKNOWN_ITEM_MESSAGE("I don`t know what do you want from me!"),

@@ -5,7 +5,9 @@ package ru.skillfactory.trades;
  */
 public enum Items {
     HEAL("heal"),
-
+    AGILITY_BOOSTER("agility"),
+    PERCEPTION_BOOSTER("perception"),
+    LUCK_BOOSTER("luck"),
     ARMOR("armor");
 
 

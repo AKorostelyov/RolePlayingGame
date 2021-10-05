@@ -109,19 +109,33 @@ public class Game {
         switch (choice) {
             case "1":
                 if (tradeShop.buyItem(Items.HEAL, Integer.parseInt(count))) {
-                    Player.getInstance().setMoney(
-                            Player.getInstance().getMoney() - tradeShop.getHealPoisonPrice() * Integer.parseInt(count));
                     Statistic.addHeals(Integer.parseInt(count));
-                    Statistic.addSpentCoins(tradeShop.getHealPoisonPrice() * Integer.parseInt(count));
-
+                    Statistic.addSpentCoins(tradeShop.getItemPrice(Items.HEAL) * Integer.parseInt(count));
                     Player.getInstance().refillHealth(Configuration.HEAL_POISON_REFILL_AMOUNT * Integer.parseInt(count));
                 }
                 break;
             case "2":
                 if (tradeShop.buyItem(Items.ARMOR, Integer.parseInt(count))) {
-                    Player.getInstance().setMoney(Player.getInstance().getMoney() - tradeShop.getArmorPrice() * Integer.parseInt(count));
                     Player.getInstance().setDefence(Player.getInstance().getDefence() + Configuration.ARMOR_DEFAULT_DEFENSE_BONUS * Integer.parseInt(count));
-                    Statistic.addSpentCoins(tradeShop.getArmorPrice() * Integer.parseInt(count));
+                    Statistic.addSpentCoins(tradeShop.getItemPrice(Items.ARMOR) * Integer.parseInt(count));
+                }
+                break;
+            case "3":
+                if (tradeShop.buyItem(Items.AGILITY_BOOSTER, Integer.parseInt(count))) {
+                    Player.getInstance().setAgilityLvl(Player.getInstance().getAgilityLvl()+1);
+                    Statistic.addSpentCoins(tradeShop.getItemPrice(Items.AGILITY_BOOSTER) * Integer.parseInt(count));
+                }
+                break;
+            case "4":
+                if (tradeShop.buyItem(Items.LUCK_BOOSTER, Integer.parseInt(count))) {
+                    Player.getInstance().setLuckLvl(Player.getInstance().getLuckLvl()+1);
+                    Statistic.addSpentCoins(tradeShop.getItemPrice(Items.LUCK_BOOSTER) * Integer.parseInt(count));
+                }
+                break;
+            case "5":
+                if (tradeShop.buyItem(Items.PERCEPTION_BOOSTER, Integer.parseInt(count))) {
+                    Player.getInstance().setPerceptionLvl(Player.getInstance().getPerceptionLvl()+1);
+                    Statistic.addSpentCoins(tradeShop.getItemPrice(Items.PERCEPTION_BOOSTER) * Integer.parseInt(count));
                 }
                 break;
             case "0":
