@@ -8,7 +8,8 @@ public enum Items {
     AGILITY_BOOSTER("agility"),
     PERCEPTION_BOOSTER("perception"),
     LUCK_BOOSTER("luck"),
-    ARMOR("armor");
+    ARMOR("armor"),
+    WEAPON("weapon");
 
 
     private final String name;

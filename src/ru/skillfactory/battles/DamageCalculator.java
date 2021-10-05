@@ -9,7 +9,7 @@ import java.util.Random;
 /**
  * Класс, вычисляющий наносимый урон
  */
-public class DamageHelper {
+public class DamageCalculator {
     static final Random random = new Random();
 
     /**

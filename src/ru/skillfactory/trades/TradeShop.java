@@ -26,6 +26,7 @@ public class TradeShop {
         this.assortments.add(new Assortment(Items.AGILITY_BOOSTER, Configuration.AGILITY_BOOSTER_DEFAULT_STOCK, Configuration.AGILITY_BOOSTER_DEFAULT_PRICE));
         this.assortments.add(new Assortment(Items.LUCK_BOOSTER, Configuration.LUCK_BOOSTER_DEFAULT_STOCK, Configuration.LUCK_BOOSTER_DEFAULT_PRICE));
         this.assortments.add(new Assortment(Items.PERCEPTION_BOOSTER, Configuration.PERCEPTION_BOOSTER_DEFAULT_STOCK, Configuration.PERCEPTION_BOOSTER_DEFAULT_PRICE));
+        this.assortments.add(new Assortment(Items.WEAPON, Configuration.WEAPON_DEFAULT_STOCK,Configuration.WEAPON_DEFAULT_PRICE));
     }
 
     /**
@@ -146,7 +147,9 @@ public class TradeShop {
                 String.valueOf(getItemStock(Items.LUCK_BOOSTER)),
                 String.valueOf(getItemPrice(Items.LUCK_BOOSTER)),
                 String.valueOf(getItemStock(Items.PERCEPTION_BOOSTER)),
-                String.valueOf(getItemPrice(Items.PERCEPTION_BOOSTER))
+                String.valueOf(getItemPrice(Items.PERCEPTION_BOOSTER)),
+                String.valueOf(getItemStock(Items.WEAPON)),
+                String.valueOf(getItemPrice(Items.WEAPON))
         );
     }
 

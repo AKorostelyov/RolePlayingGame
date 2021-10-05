@@ -9,7 +9,7 @@ import ru.skillfactory.maintenance.Printer;
 /**
  * Класс, рассчитывающий полученный опыт и повышение уровня героя
  */
-public class ExperienceHelper {
+public class ExperienceCalculator {
 
     /**
      * Начисление полученного опыта герою
@@ -58,6 +58,6 @@ public class ExperienceHelper {
             newLvl++;
             newExpPoints -= Configuration.EXP_POINTS_TO_LVL;
         }
-        return new Pair<>(newLvl, Configuration.EXP_POINTS_TO_LVL - newExpPoints);
+        return new Pair<>(newLvl, Configuration.EXP_POINTS_TO_LVL * newLvl - newExpPoints);
     }
 }

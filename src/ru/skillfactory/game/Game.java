@@ -1,6 +1,6 @@
 package ru.skillfactory.game;
 
-import ru.skillfactory.battles.BattleHelper;
+import ru.skillfactory.battles.BattleManager;
 import ru.skillfactory.creatures.player.Player;
 import ru.skillfactory.maintenance.Printer;
 import ru.skillfactory.trades.Items;
@@ -142,6 +142,12 @@ public class Game {
                     Statistic.addSpentCoins(tradeShop.getItemPrice(Items.PERCEPTION_BOOSTER) * Integer.parseInt(count));
                 }
                 break;
+            case "6":
+                if (tradeShop.buyItem(Items.WEAPON, Integer.parseInt(count))) {
+                    Player.getInstance().setStrengthLvl(Player.getInstance().getStrengthLvl()+Configuration.WEAPON_DEFAULT_DAMAGE_BONUS);
+                    Statistic.addSpentCoins(tradeShop.getItemPrice(Items.WEAPON) * Integer.parseInt(count));
+                }
+                break;
             case "0":
                 Printer.print(GameMessages.TRADER_FAREWELL_MESSAGE);
                 break;
@@ -159,7 +165,7 @@ public class Game {
      */
     private static void battle() throws InterruptedException {
         currentLocation = Location.FOREST;
-        Thread battle = new Thread(BattleHelper::initBattle);
+        Thread battle = new Thread(BattleManager::initBattle);
         battle.start();
         battle.join();
         if (Player.getInstance().isAlive()) {

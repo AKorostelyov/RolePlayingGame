@@ -10,7 +10,7 @@ import java.util.Random;
 /**
  * Класс рассчитывающий награды за победы в бою
  */
-public class BonusHelper {
+public class BonusCalculator {
 
     /**
      * Метод, рассчитывающий количество монет за монстра
