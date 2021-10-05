@@ -13,7 +13,8 @@ public enum GameMessages {
     COMMON_CLASS_DESCRIPTION_AND_CHOICE_MESSAGE("Now let`s choose your class\n" +
             "1. Knight: strong warrior, but a little slow\n" +
             "2. Hunter: fast unit, who can avoid monsters attacks\n" +
-            "3. Peasant: HARDCORE\n" +
+            "3. Wizard: weak unit, with amazing damage\n" +
+            "4. Peasant: HARDCORE\n" +
             "So, what you choose? (enter number of class)"),
     COMMON_FIRST_WAY_CHOICE_MESSAGE("Now you`re ready for adventures\n" +
             "Let`s go to a first battle"),
@@ -74,11 +75,17 @@ public enum GameMessages {
                     "   Perception: %s,\n" +
                     "   Luck: %s,\n" +
                     "   Defence: %s\n" +
-                    " Achievements:\n" +
-                    "   Monsters killed: %s,\n" +
+                    " Items:\n" +
                     "   Heals used: %s,\n" +
                     "   Coins earned: %s\n" +
-                    "   Spent coins: %s"),
+                    "   Spent coins: %s\n" +
+                    " Monsters:\n" +
+                    "   All: %s,\n" +
+                    "   Skeletons: %s,\n" +
+                    "   Bandits: %s,\n" +
+                    "   Spiders: %s,\n" +
+                    "   Trolls: %s,\n" +
+                    "   Dragons: %s."),
 
     BATTLE_MONSTER_HIT_MESSAGE("Monster %s gets %s points of damage"),
     BATTLE_PLAYER_HIT_MESSAGE("%s gets %s points of damage"),

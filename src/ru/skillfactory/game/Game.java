@@ -25,6 +25,7 @@ public class Game {
      */
     public static void startGame() throws InterruptedException {
         tradeShop.resetStocks();
+        Statistic.resetStatistic();
 
         Printer.print(GameMessages.COMMON_NAME_CHOICE_MESSAGE);
         String playerName = scanner.next();
@@ -37,6 +38,9 @@ public class Game {
                 break;
             case 2:
                 Player.getInstance().setHunterClass(playerName);
+                break;
+            case 3:
+                Player.getInstance().setWizardClass(playerName);
                 break;
             default:
                 Player.getInstance().setPeasantClass(playerName);

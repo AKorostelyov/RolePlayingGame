@@ -41,13 +41,12 @@ public class BattleHelper {
         }
 
         if (Player.getInstance().getHealth() <= 0) {
-            Player.getInstance().setAlive(false);
-            Player.getInstance().setHealth(0);
+            Player.getInstance().confirmDeath();
         } else {
             Printer.formatPrint(GameMessages.BATTLE_MONSTER_KILL_MESSAGE, monster.getClass().getSimpleName(), Player.getInstance().getName(), String.valueOf(Player.getInstance().getHealth()));
             ExperienceHelper.updateExpPlayer(monster.getExperienceBonus());
             BonusHelper.earnCoins();
-            Statistic.addMonster();
+            Statistic.addMonster(monster);
         }
     }
 
@@ -56,7 +55,7 @@ public class BattleHelper {
      * @param monster монстр
      */
     private static void monsterTakeDamage(Monster monster) {
-        int damage = DamageHelper.calculateDamage(Player.getInstance().getStrengthLvl(), Player.getInstance().getAgilityLvl());
+        int damage = DamageHelper.calculatePlayerDamage();
         if (damage == 0)
             Printer.formatPrint(GameMessages.BATTLE_MISSED_HIT, Player.getInstance().getName());
         else {
@@ -70,7 +69,7 @@ public class BattleHelper {
      * @param monster монстр
      */
     private static void playerTakeDamage(Monster monster) {
-        int damage = DamageHelper.calculateDamage(monster.getAttackDamage(), monster.getAgilityLvl());
+        int damage = DamageHelper.calculateMonsterDamage(monster.getAttackDamage(), monster.getAgilityLvl());
         if (damage == 0) {
             Printer.formatPrint(GameMessages.BATTLE_MISSED_HIT, monster.getClass().getSimpleName());
         } else {

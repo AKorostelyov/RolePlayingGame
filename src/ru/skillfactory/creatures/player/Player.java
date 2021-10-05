@@ -158,10 +158,15 @@ public class Player {
         this.health = this.maxHealth;
     }
 
+    public void confirmDeath() {
+        this.isAlive = false;
+        this.health = 0;
+    }
+
     public void setHunterClass(String name) {
         this.name = name;
-        this.health = 10;
-        this.maxHealth = 10;
+        this.health = 14;
+        this.maxHealth = 14;
         this.money = 20;
         this.lvl = 1;
         this.agilityLvl = 8;
@@ -177,11 +182,11 @@ public class Player {
 
     public void setKnightClass(String name) {
         this.name = name;
-        this.health = 12;
-        this.maxHealth = 12;
+        this.health = 18;
+        this.maxHealth = 18;
         this.money = 50;
         this.lvl = 1;
-        this.agilityLvl = 4;
+        this.agilityLvl = 5;
         this.strengthLvl = 8;
         this.perceptionLvl = 4;
         this.luckLvl = 3;
@@ -198,14 +203,31 @@ public class Player {
         this.maxHealth = 8;
         this.money = 5;
         this.lvl = 1;
-        this.agilityLvl = 4;
-        this.strengthLvl = 5;
+        this.agilityLvl = 3;
+        this.strengthLvl = 3;
         this.perceptionLvl = 4;
         this.luckLvl = 7;
         this.experienceToLvl = Configuration.EXP_POINTS_TO_LVL;
         this.defence = 3;
         this.isAlive = true;
         this.playerClass = "Peasant";
+        printCharacterDescription();
+    }
+
+    public void setWizardClass(String name) {
+        this.name = name;
+        this.health = 12;
+        this.maxHealth = 12;
+        this.money = 30;
+        this.lvl = 1;
+        this.agilityLvl = 6;
+        this.strengthLvl = 20;
+        this.perceptionLvl = 5;
+        this.luckLvl = 6;
+        this.experienceToLvl = Configuration.EXP_POINTS_TO_LVL;
+        this.defence = 0;
+        this.isAlive = true;
+        this.playerClass = "Wizard";
         printCharacterDescription();
     }
 }

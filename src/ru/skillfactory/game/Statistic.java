@@ -1,7 +1,11 @@
 package ru.skillfactory.game;
 
+import ru.skillfactory.creatures.monsters.*;
 import ru.skillfactory.creatures.player.Player;
 import ru.skillfactory.maintenance.Printer;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Класс для сбора статистики
@@ -11,9 +15,16 @@ public class Statistic {
     private static int earnedCoins = 0;
     private static int usedHeals = 0;
     private static double spentCoins = 0;
+    private static Map<String, Integer> specificMonsters = new HashMap<>();
 
-    public static void addMonster() {
+    public static void addMonster(Monster monster) {
         killedMonsters += 1;
+        String monsterType = monster.getClass().getSimpleName();
+        if (specificMonsters.containsKey(monsterType)) {
+            specificMonsters.put(monsterType, specificMonsters.get(monsterType) + 1);
+        } else {
+            specificMonsters.put(monsterType, 1);
+        }
     }
 
     public static void addCoins(int coins) {
@@ -38,10 +49,15 @@ public class Statistic {
                 String.valueOf(Player.getInstance().getPerceptionLvl()),
                 String.valueOf(Player.getInstance().getLuckLvl()),
                 String.valueOf(Player.getInstance().getDefence()),
-                String.valueOf(killedMonsters),
                 String.valueOf(usedHeals),
                 String.valueOf(earnedCoins),
-                String.valueOf(Math.round(spentCoins))
+                String.valueOf(Math.round(spentCoins)),
+                String.valueOf(killedMonsters),
+                String.valueOf((specificMonsters.get(Skeleton.class.getSimpleName()) == null) ? "0" : specificMonsters.get(Skeleton.class.getSimpleName())),
+                String.valueOf((specificMonsters.get(Bandit.class.getSimpleName()) == null) ? "0" : specificMonsters.get(Bandit.class.getSimpleName())),
+                String.valueOf((specificMonsters.get(Spider.class.getSimpleName()) == null) ? "0" : specificMonsters.get(Spider.class.getSimpleName())),
+                String.valueOf((specificMonsters.get(Troll.class.getSimpleName()) == null) ? "0" : specificMonsters.get(Troll.class.getSimpleName())),
+                String.valueOf((specificMonsters.get(Dragon.class.getSimpleName()) == null) ? "0" : specificMonsters.get(Dragon.class.getSimpleName()))
         );
     }
 
@@ -50,5 +66,6 @@ public class Statistic {
         earnedCoins = 0;
         usedHeals = 0;
         spentCoins = 0;
+        specificMonsters.clear();
     }
 }

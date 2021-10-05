@@ -5,7 +5,7 @@ import ru.skillfactory.maintenance.Printer;
 
 public class Dragon extends Monster {
     public Dragon() {
-        this.health = 800;
+        this.health = 180;
         this.agilityLvl = 12;
         this.attackDamage = 80;
         this.perceptionLvl = 15;
