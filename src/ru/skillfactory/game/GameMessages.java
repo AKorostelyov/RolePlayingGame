@@ -14,11 +14,7 @@ public enum GameMessages {
     COMMON_NAME_CHOICE_MESSAGE("First, name your character\n" +
             "Name:"),
     COMMON_GREETING_MESSAGE("Perfect! Nice to meet you, %s"),
-    COMMON_CLASS_DESCRIPTION_AND_CHOICE_MESSAGE("Now let`s choose your class\n" +
-            "1. Knight: strong warrior, but a little slow\n" +
-            "2. Hunter: fast unit, who can avoid monsters attacks\n" +
-            "3. Wizard: weak unit, with amazing damage\n" +
-            "4. Peasant: HARDCORE\n" +
+    COMMON_CLASS_DESCRIPTION_AND_CHOICE_MESSAGE("Now let`s choose your class\n%s\n" +
             "So, what you choose? (enter number of class)"),
     COMMON_FIRST_WAY_CHOICE_MESSAGE("Now you`re ready for adventures\n" +
             "Let`s go to a first battle"),

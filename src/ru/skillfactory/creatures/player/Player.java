@@ -195,71 +195,21 @@ public class Player {
         Printer.formatPrint(GameMessages.PLAYER_AGILITY_UPGRADED_MESSAGE, this.name, String.valueOf(upgradeSize),String.valueOf(this.agilityLvl));
     }
 
-    public void setHunterClass(String name) {
+    public void setPlayerClass(String name,int classIndex) {
+        PlayerClass playerClass = PlayerClass.values()[classIndex];
         this.name = name;
-        this.health = 14;
-        this.maxHealth = 14;
-        this.money = 20;
+        this.maxHealth = playerClass.getMaxHealth();
+        this.health = this.maxHealth;
+        this.money = playerClass.getMoney();
         this.lvl = 1;
-        this.agilityLvl = 8;
-        this.strengthLvl = 5;
-        this.perceptionLvl = 9;
-        this.luckLvl = 5;
+        this.agilityLvl = playerClass.getAgilityLvl();
+        this.strengthLvl = playerClass.getStrengthLvl();
+        this.perceptionLvl = playerClass.getPerceptionLvl();
+        this.luckLvl = playerClass.getLuckLvl();
         this.experienceToLvl = Configuration.EXP_POINTS_TO_LVL;
-        this.defence = 6;
+        this.defence = playerClass.getDefence();
         this.isAlive = true;
-        this.playerClass = "Hunter";
-        printCharacterDescription();
-    }
-
-    public void setKnightClass(String name) {
-        this.name = name;
-        this.health = 18;
-        this.maxHealth = 18;
-        this.money = 50;
-        this.lvl = 1;
-        this.agilityLvl = 5;
-        this.strengthLvl = 8;
-        this.perceptionLvl = 4;
-        this.luckLvl = 3;
-        this.experienceToLvl = Configuration.EXP_POINTS_TO_LVL;
-        this.defence = 8;
-        this.isAlive = true;
-        this.playerClass = "Knight";
-        printCharacterDescription();
-    }
-
-    public void setPeasantClass(String name) {
-        this.name = name;
-        this.health = 8;
-        this.maxHealth = 8;
-        this.money = 5;
-        this.lvl = 1;
-        this.agilityLvl = 3;
-        this.strengthLvl = 3;
-        this.perceptionLvl = 4;
-        this.luckLvl = 7;
-        this.experienceToLvl = Configuration.EXP_POINTS_TO_LVL;
-        this.defence = 3;
-        this.isAlive = true;
-        this.playerClass = "Peasant";
-        printCharacterDescription();
-    }
-
-    public void setWizardClass(String name) {
-        this.name = name;
-        this.health = 12;
-        this.maxHealth = 12;
-        this.money = 30;
-        this.lvl = 1;
-        this.agilityLvl = 6;
-        this.strengthLvl = 20;
-        this.perceptionLvl = 5;
-        this.luckLvl = 6;
-        this.experienceToLvl = Configuration.EXP_POINTS_TO_LVL;
-        this.defence = 0;
-        this.isAlive = true;
-        this.playerClass = "Wizard";
+        this.playerClass = playerClass.getPlayerClass();
         printCharacterDescription();
     }
 }

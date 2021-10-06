@@ -2,6 +2,7 @@ package ru.skillfactory.game;
 
 import ru.skillfactory.battles.BattleManager;
 import ru.skillfactory.creatures.player.Player;
+import ru.skillfactory.creatures.player.PlayerClass;
 import ru.skillfactory.maintenance.Printer;
 import ru.skillfactory.maintenance.SaveManager;
 import ru.skillfactory.trades.Items;
@@ -45,22 +46,9 @@ public class Game {
         Printer.print(GameMessages.COMMON_NAME_CHOICE_MESSAGE);
         String playerName = scanner.next();
         Printer.formatPrint(GameMessages.COMMON_GREETING_MESSAGE, playerName);
-        Printer.print(GameMessages.COMMON_CLASS_DESCRIPTION_AND_CHOICE_MESSAGE);
+        Printer.formatPrint(GameMessages.COMMON_CLASS_DESCRIPTION_AND_CHOICE_MESSAGE, PlayerClass.getClassDescription());
         int classIndex = scanner.nextInt();
-        switch (classIndex) {
-            case 1:
-                Player.getInstance().setKnightClass(playerName);
-                break;
-            case 2:
-                Player.getInstance().setHunterClass(playerName);
-                break;
-            case 3:
-                Player.getInstance().setWizardClass(playerName);
-                break;
-            default:
-                Player.getInstance().setPeasantClass(playerName);
-                break;
-        }
+        Player.getInstance().setPlayerClass(playerName, classIndex-1);
         Printer.print(GameMessages.COMMON_FIRST_WAY_CHOICE_MESSAGE);
         currentLocation = Location.FOREST;
         battle();
