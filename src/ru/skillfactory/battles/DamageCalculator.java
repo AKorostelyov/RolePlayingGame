@@ -51,7 +51,9 @@ public class DamageCalculator {
         if (random.nextInt(11) > agilityLvl) {
             return 0;
         } else {
-            return (isCritical()) ? baseDamage * 3 : baseDamage;
+            return (isCritical())
+                    ? (Math.round(baseDamage + Player.getInstance().getLvl()*10*baseDamage/100)) * 3
+                    : Math.round(baseDamage + Player.getInstance().getLvl()*10*baseDamage/100);
         }
     }
 

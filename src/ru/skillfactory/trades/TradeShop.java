@@ -35,7 +35,7 @@ public class TradeShop {
     public void updatePrices() {
         double inflation = new Random().nextInt(5)/100;
         for (Assortment assortment : assortments) {
-            assortment.setPrice(Math.round(assortment.getPrice() + assortment.getPrice()*Player.getInstance().getLvl() / 20 + ((new Random().nextBoolean()) ? (-1) * (inflation*assortment.getPrice()) : (inflation*assortment.getPrice()))));
+            assortment.setPrice(Math.round(assortment.getPrice() + (assortment.getPrice()*Player.getInstance().getLvl()) / 20 + ((new Random().nextBoolean()) ? (-1) * (inflation*assortment.getPrice()) : (inflation*assortment.getPrice()))));
         }
     }
 

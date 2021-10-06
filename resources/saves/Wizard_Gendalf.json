@@ -1,0 +1,29 @@
+{
+  "character": {
+    "name": "Gendalf",
+    "lvl": 34,
+    "class": "Wizard",
+    "strength": 178,
+    "agility": 8,
+    "perception": 6,
+    "luck": 9,
+    "defence": 105,
+    "maxHealth": 268,
+    "health": 268,
+    "money": 3819.0,
+    "expToLvl": 186
+  },
+  "statistic": {
+    "earnedCoins": 21049,
+    "spentCoins": 17260.0,
+    "healsUsed": 9,
+    "killedMonsters": 69,
+    "monsters": {
+      "Troll": 13,
+      "Spider": 20,
+      "Skeleton": 13,
+      "Bandit": 16,
+      "Dragon": 7
+    }
+  }
+}

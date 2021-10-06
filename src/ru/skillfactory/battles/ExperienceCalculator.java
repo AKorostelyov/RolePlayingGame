@@ -6,6 +6,9 @@ import ru.skillfactory.game.Configuration;
 import ru.skillfactory.game.GameMessages;
 import ru.skillfactory.game.Statistic;
 import ru.skillfactory.maintenance.Printer;
+import ru.skillfactory.maintenance.SaveManager;
+
+import java.io.IOException;
 
 /**
  * Класс, рассчитывающий полученный опыт и повышение уровня героя
@@ -43,6 +46,12 @@ public class ExperienceCalculator {
                     String.valueOf(Player.getInstance().getLvl()),
                     String.valueOf(Player.getInstance().getExperienceToLvl()),
                     String.valueOf(Player.getInstance().getLvl() + 1));
+            try {
+                SaveManager.saveGame(true);
+            } catch (IOException e) {
+                Printer.formatPrint(GameMessages.COMMON_ERROR_MESSAGE, e.getMessage());
+            }
+
         }
     }
 

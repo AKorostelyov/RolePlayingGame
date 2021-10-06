@@ -3,9 +3,12 @@ package ru.skillfactory.game;
 import ru.skillfactory.battles.BattleManager;
 import ru.skillfactory.creatures.player.Player;
 import ru.skillfactory.maintenance.Printer;
+import ru.skillfactory.maintenance.SaveManager;
 import ru.skillfactory.trades.Items;
 import ru.skillfactory.trades.TradeShop;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -18,12 +21,26 @@ public class Game {
     private static Location currentLocation = Location.FOREST;
     private static int gameDays = 1;
 
+    public static void startGame() throws InterruptedException {
+        Printer.print(GameMessages.COMMON_START_GAME_MESSAGE);
+        switch (scanner.nextInt()) {
+            case 1:
+                loadGame();
+                currentLocation = Location.TOWN;
+                continueGame();
+                break;
+            default:
+                startNewGame();
+                break;
+        }
+    }
+
     /**
      * Начало игры, определяет класс героя и проводит первый шаг
      *
      * @throws InterruptedException
      */
-    public static void startGame() throws InterruptedException {
+    public static void startNewGame() throws InterruptedException {
         resetGame();
         Printer.print(GameMessages.COMMON_NAME_CHOICE_MESSAGE);
         String playerName = scanner.next();
@@ -73,9 +90,7 @@ public class Game {
                         trade();
                         break;
                     default:
-                        isGameActive = false;
-                        Statistic.showStatistic();
-                        Printer.print(GameMessages.COMMON_FAREWELL_MESSAGE);
+                        endGame();
                         break;
                 }
                 break;
@@ -89,9 +104,7 @@ public class Game {
                         battle();
                         break;
                     default:
-                        isGameActive = false;
-                        Statistic.showStatistic();
-                        Printer.print(GameMessages.COMMON_FAREWELL_MESSAGE);
+                        endGame();
                         break;
                 }
                 break;
@@ -176,15 +189,85 @@ public class Game {
             Statistic.showStatistic();
             Printer.print(GameMessages.COMMON_TRY_AGAIN_MESSAGE);
             int decision = scanner.nextInt();
-            if (decision == 1) {
-                startGame();
-            } else {
-                isGameActive = false;
-                Printer.print(GameMessages.COMMON_FAREWELL_MESSAGE);
+            switch (decision) {
+                case 1:
+                    try {
+                        SaveManager.loadAutoSave();
+                    } catch (IOException e) {
+                        Printer.formatPrint(GameMessages.COMMON_ERROR_MESSAGE, e.getMessage());
+                    }
+                    break;
+                case 2:
+                    startNewGame();
+                    break;
+                default:
+                    isGameActive = false;
+                    Printer.print(GameMessages.COMMON_FAREWELL_MESSAGE);
+                    if (!SaveManager.clearAutoSaves()) {
+                        Printer.formatPrint(GameMessages.COMMON_ERROR_MESSAGE, "There is problems with autosaves, it can influence on next session. Be caution!");
+                    }
+                    break;
             }
         }
     }
 
+    /**
+     * Процесс завершения игры
+     */
+    private static void endGame() {
+        isGameActive = false;
+        Statistic.showStatistic();
+        Printer.print(GameMessages.COMMON_SAVE_GAME_DIALOG_MESSAGE);
+        if (scanner.nextInt() == 1) {
+            saveGame();
+        }
+        if (!SaveManager.clearAutoSaves()) {
+            Printer.formatPrint(GameMessages.COMMON_ERROR_MESSAGE, "There is problems with autosaves, it can influence on next session. Be caution!");
+        }
+        Printer.print(GameMessages.COMMON_FAREWELL_MESSAGE);
+    }
+
+    /**
+     * Сохранение игры
+     */
+    private static void saveGame() {
+        try {
+            SaveManager.saveGame(false);
+        } catch (IOException e) {
+            Printer.formatPrint(GameMessages.COMMON_ERROR_MESSAGE, e.getMessage());
+        }
+
+    }
+
+    /**
+     * Загрузка сохраненной игры
+     */
+    private static void loadGame() {
+        String saves = SaveManager.getSavesList();
+        String[] saveList;
+        if (saves != null)
+            saveList = saves.split("\n");
+        else {
+            Printer.formatPrint(GameMessages.COMMON_ERROR_MESSAGE, "No saves found");
+            return;
+        }
+        StringBuilder saveMessage = new StringBuilder();
+        for (int i = 0; i < saveList.length; i++) {
+            saveMessage.append(i + 1).append(". ").append(saveList[i]).append("\n");
+        }
+        Printer.formatPrint(GameMessages.COMMON_SAVE_CHOOSING_DIALOG, saveMessage.toString());
+        int save = scanner.nextInt();
+        try {
+            SaveManager.loadGame(Configuration.PATH_TO_SAVES + saveList[save - 1]);
+        } catch (FileNotFoundException e) {
+            Printer.formatPrint(GameMessages.COMMON_ERROR_MESSAGE, e.getMessage());
+        }
+
+    }
+
+    /**
+     * Сброс игры
+     */
     private static void resetGame() {
         tradeShop.resetStocks();
         Statistic.resetStatistic();

@@ -1,0 +1,25 @@
+{
+  "character": {
+    "name": "Phillip",
+    "lvl": 1,
+    "class": "Hunter",
+    "strength": 5,
+    "agility": 8,
+    "perception": 9,
+    "luck": 5,
+    "defence": 6,
+    "maxHealth": 14,
+    "health": 14,
+    "money": 25.0,
+    "expToLvl": 6
+  },
+  "statistic": {
+    "earnedCoins": 5,
+    "spentCoins": 0.0,
+    "healsUsed": 0,
+    "killedMonsters": 1,
+    "monsters": {
+      "Skeleton": 1
+    }
+  }
+}

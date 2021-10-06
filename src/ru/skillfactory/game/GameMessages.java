@@ -7,7 +7,11 @@ public enum GameMessages {
 
     COMMON_WELCOME_MESSAGE("Welcome traveller!\n" +
             "Let`s hunt some monsters"),
-    COMMON_NAME_CHOICE_MESSAGE("But first, name yourself\n" +
+    COMMON_START_GAME_MESSAGE("Do you have saved character?\n" +
+            " 1. Yes, I want load it,\n" +
+            " 2. No, I want start new game."),
+    COMMON_SAVE_CHOOSING_DIALOG("Which character do you want to load?\n %s"),
+    COMMON_NAME_CHOICE_MESSAGE("First, name your character\n" +
             "Name:"),
     COMMON_GREETING_MESSAGE("Perfect! Nice to meet you, %s"),
     COMMON_CLASS_DESCRIPTION_AND_CHOICE_MESSAGE("Now let`s choose your class\n" +
@@ -27,9 +31,10 @@ public enum GameMessages {
             " 2. Hunting in forest\n" +
             " 3. Exit game"),
     COMMON_FAREWELL_MESSAGE("Goodbye! Hope you like this game!"),
-    COMMON_TRY_AGAIN_MESSAGE("Would you try again?\n" +
+    COMMON_TRY_AGAIN_MESSAGE("Load last save?\n" +
             " 1. Yes\n" +
-            " 2. No"),
+            " 2. No, start new game,\n" +
+            " 3. Exit"),
     COMMON_CHARACTER_DESCRIPTION_MESSAGE("Here`s your character:\n" +
             " Health Points: %s,\n" +
             " Money: %s coins,\n" +
@@ -37,6 +42,11 @@ public enum GameMessages {
             " Perception: %s,\n" +
             " Strength: %s\n" +
             " Luck: %s"),
+    COMMON_SAVE_GAME_DIALOG_MESSAGE("Do you want to save this game?\n" +
+            " 1. Yes,\n" +
+            " 2. No."),
+    COMMON_GAME_SAVED_MESSAGE("Game successfully saved!"),
+    COMMON_ERROR_MESSAGE("Something went wrong: %s"),
 
     MONSTER_SKELETON_MESSAGE("On your road appears Skeleton. Lets take some fun."),
     MONSTER_BANDIT_MESSAGE("On your road appears Bandit. Lets the battle begin."),
