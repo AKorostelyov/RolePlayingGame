@@ -1,6 +1,8 @@
 package ru.skillfactory.game;
 
 public class Configuration {
+    public static final String PATH_TO_SAVES = "resources/saves/";
+    public static final String PATH_TO_AUTOSAVES = "resources/autosaves/";
     public static final int EXP_POINTS_TO_LVL = 8;
     public static final int COINS_FOR_LVL = 5;
     public static final int HEAL_POISON_DEFAULT_STOCK = 5;

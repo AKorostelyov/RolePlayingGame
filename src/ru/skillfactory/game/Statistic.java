@@ -17,6 +17,31 @@ public class Statistic {
     private static double spentCoins = 0;
     private static Map<String, Integer> specificMonsters = new HashMap<>();
 
+    public static int getKilledMonsters() {
+        return killedMonsters;
+    }
+
+    public static int getEarnedCoins() {
+        return earnedCoins;
+    }
+
+    public static int getUsedHeals() {
+        return usedHeals;
+    }
+
+    public static double getSpentCoins() {
+        return spentCoins;
+    }
+
+    public static Map<String, Integer> getSpecificMonsters() {
+        return specificMonsters;
+    }
+
+    /**
+     * Добавление убитого монстра в статистику
+     *
+     * @param monster убитый монстр
+     */
     public static void addMonster(Monster monster) {
         killedMonsters += 1;
         String monsterType = monster.getClass().getSimpleName();
@@ -39,6 +64,9 @@ public class Statistic {
         spentCoins += coins;
     }
 
+    /**
+     * Вывод статистики персонажа на экран
+     */
     public static void showStatistic() {
         Printer.formatPrint(GameMessages.STATS_FULL_GAME_STATISTIC_MESSAGE,
                 Player.getInstance().getName(),
@@ -61,6 +89,26 @@ public class Statistic {
         );
     }
 
+    /**
+     * Загрузка статистики из сохранения
+     *
+     * @param kills    убито монстров
+     * @param earn     получено монет
+     * @param usedHp   использовано лечебных зелий
+     * @param spent    потрачено момент
+     * @param monsters убитые монстры каждого вида
+     */
+    public static void loadStatistic(int kills, int earn, int usedHp, int spent, Map<String, Integer> monsters) {
+        killedMonsters = kills;
+        earnedCoins = earn;
+        usedHeals = usedHp;
+        spentCoins = spent;
+        specificMonsters = monsters;
+    }
+
+    /**
+     * Сброс статистики
+     */
     public static void resetStatistic() {
         killedMonsters = 0;
         earnedCoins = 0;

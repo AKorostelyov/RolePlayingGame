@@ -66,6 +66,10 @@ public class Player {
         this.health = health;
     }
 
+    public void setPlayerClass(String playerClass) {
+        this.playerClass = playerClass;
+    }
+
     public double getMoney() {
         return money;
     }
