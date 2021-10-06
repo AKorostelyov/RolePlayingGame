@@ -55,13 +55,7 @@ public enum GameMessages {
     MONSTER_DRAGON_MESSAGE("On your road appears Dragon. Maybe you should run away?"),
 
     TRADER_WELCOME_MESSAGE("Welcome, traveller!\n" +
-            " Here`s my assortment:\n" +
-            "  1. Heal poison (+5 health points), %s pcs - %s coins,\n" +
-            "  2. Armor (+5 to defence), %s pcs - %s coins\n" +
-            "  3. Agility booster (+1 to agility level), %s pcs - %s coins,\n" +
-            "  4. Luck booster (+1 to luck level), %s pcs - %s coins,\n" +
-            "  5. Perception booster (+1 to perception level), %s pcs - %s coins,\n" +
-            "  6. Weapon upgrade (+5 to attack), %s pcs - %s coins.\n" +
+            " Here`s my assortment:\n%s\n" +
             "For choice enter item number and count.\n" +
             "For exit enter '0 0'"),
     TRADER_UNKNOWN_ITEM_MESSAGE("I don`t know what do you want from me!"),
@@ -74,6 +68,15 @@ public enum GameMessages {
     TRADER_NOT_ENOUGH_STOCK_MESSAGE("Not enough stocks. I can offer only %s pieces."),
     TRADER_PLAYERS_COINS("%s has %s coins in pockets"),
     TRADER_STOCK_RESET("Trader`s stock was reset"),
+
+    PLAYER_HEALTH_FULFILLED_MESSAGE("%s's health fulfilled"),
+    PLAYER_HEALTH_REDEEMED_MESSAGE("%s redeem %s hp"),
+    PLAYER_DEFENCE_UPGRADED_MESSAGE("%s upgrades defence on %s points, current defence - %s"),
+    PLAYER_AGILITY_UPGRADED_MESSAGE("%s upgrades agility on %s points, current agility - %s"),
+    PLAYER_LUCK_UPGRADED_MESSAGE("%s upgrades luck on %s points, current luck - %s"),
+    PLAYER_PERCEPTION_UPGRADED_MESSAGE("%s upgrades perception on %s points, current perception - %s"),
+    PLAYER_DAMAGE_UPGRADED_MESSAGE("%s upgrades damage on %s points, current damage - %s"),
+
 
     STATS_HEALTH_MESSAGE("%s has %s / %s health, for now"),
     STATS_FULL_GAME_STATISTIC_MESSAGE(

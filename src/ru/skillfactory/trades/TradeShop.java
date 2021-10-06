@@ -3,6 +3,7 @@ package ru.skillfactory.trades;
 import ru.skillfactory.creatures.player.Player;
 import ru.skillfactory.game.Configuration;
 import ru.skillfactory.game.GameMessages;
+import ru.skillfactory.game.Statistic;
 import ru.skillfactory.maintenance.Printer;
 
 import java.util.ArrayList;
@@ -33,9 +34,9 @@ public class TradeShop {
      * Обновляет цены, изменяя их случайным образом в отрезке (-15, 15) процентов от базовой цены
      */
     public void updatePrices() {
-        double inflation = new Random().nextInt(5)/100;
+        double inflation = new Random().nextInt(5) / 100;
         for (Assortment assortment : assortments) {
-            assortment.setPrice(Math.round(assortment.getPrice() + (assortment.getPrice()*Player.getInstance().getLvl()) / 20 + ((new Random().nextBoolean()) ? (-1) * (inflation*assortment.getPrice()) : (inflation*assortment.getPrice()))));
+            assortment.setPrice(Math.round(assortment.getPrice() + (assortment.getPrice() * Player.getInstance().getLvl()) / 20 + ((new Random().nextBoolean()) ? (-1) * (inflation * assortment.getPrice()) : (inflation * assortment.getPrice()))));
         }
     }
 
@@ -43,16 +44,41 @@ public class TradeShop {
     /**
      * Покупка предметов
      *
-     * @param item  желаемый предмет
+     * @param itemNum  номер желаемого предмета
      * @param count количество
      * @return успешность операции
      */
-    public boolean buyItem(Items item, int count) {
-        int remainStock = trade(count, getItemPrice(item), getItemStock(item));
+    public boolean buyItem(int itemNum, int count) {
+        if (itemNum - 1 > assortments.size()) {
+            return false;
+        }
+        int remainStock = trade(count, getItemPrice(itemNum - 1), getItemStock(itemNum - 1));
         if (remainStock < 0) {
             return false;
         } else {
-            updateItemStock(item, remainStock);
+            updateItemStock(itemNum - 1, remainStock);
+            switch (assortments.get(itemNum - 1).getItem()) {
+                case ARMOR:
+                    Player.getInstance().upgradeDefence(Configuration.ARMOR_DEFAULT_DEFENSE_BONUS * count);
+                    break;
+                case HEAL:
+                    Player.getInstance().refillHealth(Configuration.HEAL_POISON_REFILL_AMOUNT * count);
+                    Statistic.addHeals(count);
+                    break;
+                case WEAPON:
+                    Player.getInstance().updgradeWeapon(Configuration.WEAPON_DEFAULT_DAMAGE_BONUS * count);
+                    break;
+                case LUCK_BOOSTER:
+                    Player.getInstance().upgradeLuck(Configuration.LUCK_BOOSTEER_DEFAULT_BONUS * count);
+                    break;
+                case AGILITY_BOOSTER:
+                    Player.getInstance().upgradeAgility(Configuration.AGILITY_BOOSTEER_DEFAULT_BONUS * count);
+                    break;
+                case PERCEPTION_BOOSTER:
+                    Player.getInstance().upgradePerception(Configuration.PERCEPTION_BOOSTEER_DEFAULT_BONUS * count);
+                    break;
+            }
+            Statistic.addSpentCoins(assortments.get(itemNum - 1).getPrice() * count);
             return true;
         }
     }
@@ -108,18 +134,7 @@ public class TradeShop {
                 Player.getInstance().getName(),
                 String.valueOf(Player.getInstance().getMoney()));
         Printer.formatPrint(GameMessages.TRADER_WELCOME_MESSAGE,
-                String.valueOf(getItemStock(Items.HEAL)),
-                String.valueOf(getItemPrice(Items.HEAL)),
-                String.valueOf(getItemStock(Items.ARMOR)),
-                String.valueOf(getItemPrice(Items.ARMOR)),
-                String.valueOf(getItemStock(Items.AGILITY_BOOSTER)),
-                String.valueOf(getItemPrice(Items.AGILITY_BOOSTER)),
-                String.valueOf(getItemStock(Items.LUCK_BOOSTER)),
-                String.valueOf(getItemPrice(Items.LUCK_BOOSTER)),
-                String.valueOf(getItemStock(Items.PERCEPTION_BOOSTER)),
-                String.valueOf(getItemPrice(Items.PERCEPTION_BOOSTER)),
-                String.valueOf(getItemStock(Items.WEAPON)),
-                String.valueOf(getItemPrice(Items.WEAPON))
+                getAssortment()
         );
     }
 
@@ -130,30 +145,16 @@ public class TradeShop {
         initAssortment();
     }
 
-    public long getItemPrice(Items items) {
-        for (Assortment assortment : assortments) {
-            if (assortment.getItem().equals(items)) {
-                return assortment.getPrice();
-            }
-        }
-        return 0;
+    public long getItemPrice(int itemNum) {
+        return this.assortments.get(itemNum).getPrice();
     }
 
-    private int getItemStock(Items items) {
-        for (Assortment assortment : assortments) {
-            if (assortment.getItem().equals(items)) {
-                return assortment.getStock();
-            }
-        }
-        return -1;
+    private int getItemStock(int itemNum) {
+        return this.assortments.get(itemNum).getStock();
     }
 
-    private void updateItemStock(Items items, int stock) {
-        for (Assortment assortment : assortments) {
-            if (assortment.getItem().equals(items)) {
-                assortment.setStock(stock);
-            }
-        }
+    private void updateItemStock(int itemNum, int stock) {
+        assortments.get(itemNum).setStock(stock);
     }
 
     private Assortment getAssortment(Items items) {
@@ -163,6 +164,22 @@ public class TradeShop {
             }
         }
         return null;
+    }
+
+    public String getAssortment() {
+        StringBuilder assortmentText = new StringBuilder();
+        for (int i = 0; i < this.assortments.size(); i++) {
+            assortmentText.append(" ")
+                    .append(i + 1)
+                    .append(". ")
+                    .append(assortments.get(i).getItem())
+                    .append(", ")
+                    .append(assortments.get(i).getStock())
+                    .append(" pcs - ")
+                    .append(assortments.get(i).getPrice())
+                    .append(" coins\n");
+        }
+        return assortmentText.toString();
     }
 }
 

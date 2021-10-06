@@ -156,15 +156,43 @@ public class Player {
 
     public void refillHealth(int points) {
         this.health = Math.min(this.health + points, this.maxHealth);
+        Printer.formatPrint(GameMessages.PLAYER_HEALTH_REDEEMED_MESSAGE, this.name, String.valueOf(points));
+        Printer.formatPrint(GameMessages.STATS_HEALTH_MESSAGE, this.name, String.valueOf(this.health),String.valueOf(this.maxHealth));
     }
 
     public void fullFillHealth() {
         this.health = this.maxHealth;
+        Printer.formatPrint(GameMessages.PLAYER_HEALTH_FULFILLED_MESSAGE, this.name);
     }
 
     public void confirmDeath() {
         this.isAlive = false;
         this.health = 0;
+    }
+
+    public void upgradeDefence(int upgradeSize) {
+        this.defence += upgradeSize;
+        Printer.formatPrint(GameMessages.PLAYER_DEFENCE_UPGRADED_MESSAGE, this.name, String.valueOf(upgradeSize),String.valueOf(this.defence));
+    }
+
+    public void updgradeWeapon(int upgradeSize) {
+        this.strengthLvl += upgradeSize;
+        Printer.formatPrint(GameMessages.PLAYER_DAMAGE_UPGRADED_MESSAGE, this.name, String.valueOf(upgradeSize),String.valueOf(this.strengthLvl));
+    }
+
+    public void upgradePerception(int upgradeSize) {
+        this.perceptionLvl += upgradeSize;
+        Printer.formatPrint(GameMessages.PLAYER_PERCEPTION_UPGRADED_MESSAGE, this.name, String.valueOf(upgradeSize),String.valueOf(this.perceptionLvl));
+    }
+
+    public void upgradeLuck(int upgradeSize) {
+        this.luckLvl += upgradeSize;
+        Printer.formatPrint(GameMessages.PLAYER_LUCK_UPGRADED_MESSAGE, this.name, String.valueOf(upgradeSize),String.valueOf(this.luckLvl));
+    }
+
+    public void upgradeAgility(int upgradeSize) {
+        this.agilityLvl += upgradeSize;
+        Printer.formatPrint(GameMessages.PLAYER_AGILITY_UPGRADED_MESSAGE, this.name, String.valueOf(upgradeSize),String.valueOf(this.agilityLvl));
     }
 
     public void setHunterClass(String name) {
